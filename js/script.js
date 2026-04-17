@@ -128,6 +128,7 @@ function changeImg(imageSrc, trigger) {
     }
 
     mainImage.src = imageSrc;
+    mainImage.dataset.imagePath = imageSrc;
 
     document.querySelectorAll("#thumbnailList img").forEach((thumb) => {
         thumb.classList.remove("active");
@@ -136,6 +137,140 @@ function changeImg(imageSrc, trigger) {
     if (trigger) {
         trigger.classList.add("active");
     }
+}
+
+// Open a full-screen zoom view for the main product image
+function setupImageZoom() {
+    const mainImage = document.getElementById("mainImg");
+    const modal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImg");
+    const closeButton = document.getElementById("imageModalClose");
+    const prevButton = document.getElementById("imageModalPrev");
+    const nextButton = document.getElementById("imageModalNext");
+
+    if (!mainImage || !modal || !modalImage || !closeButton || !prevButton || !nextButton) {
+        return;
+    }
+
+    let modalImages = [];
+    let activeIndex = 0;
+    let touchStartX = 0;
+    let touchCurrentX = 0;
+
+    function syncModalImages() {
+        const thumbnails = Array.from(document.querySelectorAll("#thumbnailList img"));
+        const currentImagePath = mainImage.dataset.imagePath || mainImage.getAttribute("src");
+        modalImages = thumbnails.map((thumb) => thumb.dataset.image);
+        activeIndex = modalImages.indexOf(currentImagePath);
+
+        if (activeIndex < 0) {
+            activeIndex = 0;
+        }
+
+        if (!modalImages.length && mainImage.src) {
+            modalImages = [mainImage.src];
+            activeIndex = 0;
+        }
+    }
+
+    function showModalImage(index) {
+        if (!modalImages.length) {
+            return;
+        }
+
+        activeIndex = (index + modalImages.length) % modalImages.length;
+        const imageSrc = modalImages[activeIndex];
+        modalImage.src = imageSrc;
+        modalImage.alt = mainImage.alt;
+
+        const activeThumb = document.querySelector(`#thumbnailList img[data-image="${CSS.escape(imageSrc)}"]`);
+        changeImg(imageSrc, activeThumb);
+    }
+
+    function openModal() {
+        if (!mainImage.src) {
+            return;
+        }
+
+        syncModalImages();
+        showModalImage(activeIndex);
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = "";
+    }
+
+    function showPrevious() {
+        showModalImage(activeIndex - 1);
+    }
+
+    function showNext() {
+        showModalImage(activeIndex + 1);
+    }
+
+    mainImage.addEventListener("click", openModal);
+    mainImage.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openModal();
+        }
+    });
+
+    closeButton.addEventListener("click", closeModal);
+    prevButton.addEventListener("click", showPrevious);
+    nextButton.addEventListener("click", showNext);
+
+    modal.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    modalImage.addEventListener("touchstart", (event) => {
+        touchStartX = event.changedTouches[0].clientX;
+        touchCurrentX = touchStartX;
+    }, { passive: true });
+
+    modalImage.addEventListener("touchmove", (event) => {
+        touchCurrentX = event.changedTouches[0].clientX;
+    }, { passive: true });
+
+    modalImage.addEventListener("touchend", () => {
+        const distance = touchCurrentX - touchStartX;
+
+        if (Math.abs(distance) < 40) {
+            return;
+        }
+
+        if (distance > 0) {
+            showPrevious();
+        } else {
+            showNext();
+        }
+    });
+
+    document.addEventListener("keydown", (event) => {
+        if (!modal.classList.contains("open")) {
+            return;
+        }
+
+        if (event.key === "Escape") {
+            closeModal();
+        }
+
+        if (event.key === "ArrowLeft") {
+            showPrevious();
+        }
+
+        if (event.key === "ArrowRight") {
+            showNext();
+        }
+    });
 }
 
 // Render the correct product on product.html based on URL parameter
@@ -170,6 +305,7 @@ function renderProductDetails() {
     descEl.textContent = product.description;
     mainImage.src = product.images[0];
     mainImage.alt = product.name;
+    mainImage.dataset.imagePath = product.images[0];
     buyLink.href = `https://wa.me/919330948227?text=${encodeURIComponent(`Hello Manjima's Sharyalap, I want to buy ${product.name}.`)}`;
 
     // Create all thumbnails for the selected product
@@ -192,3 +328,4 @@ function renderProductDetails() {
 setupNavToggle();
 renderHomeProducts();
 renderProductDetails();
+setupImageZoom();
