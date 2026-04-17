@@ -1,3 +1,4 @@
+/* Global theme variables: change brand colors, shadows, spacing, and radius here */
 :root {
     --bg: #fffaf4;
     --surface: #fffdf9;
@@ -17,6 +18,7 @@
     --container: 1180px;
 }
 
+/* Base reset / global defaults */
 * {
     box-sizing: border-box;
 }
@@ -48,11 +50,13 @@ button {
     font: inherit;
 }
 
+/* Shared layout helpers */
 .container {
     width: min(calc(100% - 2rem), var(--container));
     margin: 0 auto;
 }
 
+/* Reusable section spacing */
 .section {
     padding: 5.5rem 0;
 }
@@ -61,6 +65,7 @@ button {
     background: rgba(255, 255, 255, 0.65);
 }
 
+/* Small top labels used above headings */
 .eyebrow {
     display: inline-block;
     margin-bottom: 0.9rem;
@@ -71,6 +76,7 @@ button {
     color: var(--primary);
 }
 
+/* Header and navigation */
 .site-header {
     position: sticky;
     top: 0;
@@ -88,6 +94,7 @@ button {
     padding: 1rem 0;
 }
 
+/* Brand logo and name */
 .brand {
     display: flex;
     align-items: center;
@@ -120,6 +127,7 @@ button {
     font-size: 0.9rem;
 }
 
+/* Desktop navigation and CTA button */
 .site-nav {
     display: flex;
     align-items: center;
@@ -147,6 +155,7 @@ button {
     box-shadow: 0 10px 24px rgba(143, 29, 44, 0.22);
 }
 
+/* Mobile menu button */
 .nav-toggle {
     display: none;
     width: 48px;
@@ -168,6 +177,7 @@ button {
     border-radius: 999px;
 }
 
+/* Homepage hero section */
 .hero-section {
     padding: 5.8rem 0 4rem;
 }
@@ -207,6 +217,7 @@ button {
     margin: 2rem 0 1.4rem;
 }
 
+/* Primary buttons */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -235,6 +246,7 @@ button {
     color: var(--text);
 }
 
+/* Hero trust points and product benefit pills */
 .hero-points,
 .product-benefits {
     display: flex;
@@ -252,6 +264,7 @@ button {
     font-size: 0.92rem;
 }
 
+/* Shared card styling */
 .hero-card,
 .cta-banner,
 .contact-panel,
@@ -266,6 +279,7 @@ button {
     border: 1px solid rgba(143, 29, 44, 0.08);
 }
 
+/* Hero card with branded background */
 .hero-card {
     padding: 2rem;
     background:
@@ -333,6 +347,7 @@ button {
     font-weight: 700;
 }
 
+/* Trust strip below hero */
 .proof-strip {
     padding-bottom: 1rem;
 }
@@ -364,11 +379,13 @@ button {
     font-size: 0.94rem;
 }
 
+/* Section headings */
 .section-heading {
     max-width: 720px;
     margin-bottom: 2.4rem;
 }
 
+/* Product listing and feature grids */
 .product-grid,
 .feature-grid {
     display: grid;
@@ -376,6 +393,7 @@ button {
     gap: 1.4rem;
 }
 
+/* Product card styles */
 .card {
     overflow: hidden;
 }
@@ -446,6 +464,7 @@ button {
     font-weight: 800;
 }
 
+/* Two-column content sections */
 .two-column,
 .contact-grid,
 .product-layout {
@@ -459,6 +478,7 @@ button {
     padding: 1.5rem;
 }
 
+/* CTA banner */
 .cta-section {
     padding-top: 0;
 }
@@ -473,6 +493,7 @@ button {
         linear-gradient(135deg, rgba(255, 240, 221, 0.98), rgba(255, 250, 244, 0.92));
 }
 
+/* Contact and product information panels */
 .contact-panel,
 .map-card,
 .product-info {
@@ -496,6 +517,7 @@ button {
     border-radius: 20px;
 }
 
+/* Footer */
 .site-footer {
     padding: 2.2rem 0;
     border-top: 1px solid rgba(101, 16, 28, 0.08);
@@ -514,6 +536,7 @@ button {
     color: var(--muted);
 }
 
+/* Product page layout */
 .product-page {
     padding-top: 1rem;
 }
@@ -542,6 +565,7 @@ button {
     border-radius: 18px;
 }
 
+/* Product gallery thumbnails */
 .thumbs {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -576,6 +600,7 @@ button {
     font-weight: 800;
 }
 
+/* Responsive layout rules */
 @media (max-width: 1080px) {
     .product-grid,
     .feature-grid {

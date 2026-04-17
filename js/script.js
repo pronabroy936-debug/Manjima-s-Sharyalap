@@ -1,5 +1,9 @@
+// Product catalog:
+// Add more products here by copying one object and changing the values.
+// The `id` must stay unique because product.html uses it from the URL.
 const products = [
     {
+        // Product 1
         id: "silk-radiance",
         name: "Silk Radiance Saree",
         category: "Signature Silk",
@@ -15,6 +19,7 @@ const products = [
         ]
     },
     {
+        // Product 2
         id: "heritage-drape",
         name: "Heritage Drape Saree",
         category: "Festive Collection",
@@ -30,6 +35,7 @@ const products = [
     }
 ];
 
+// Mobile menu open / close behavior
 function setupNavToggle() {
     const toggle = document.querySelector(".nav-toggle");
     const nav = document.querySelector(".site-nav");
@@ -51,6 +57,7 @@ function setupNavToggle() {
     });
 }
 
+// Product card template used on the homepage collection section
 function createProductCard(product) {
     return `
         <article class="card">
@@ -71,6 +78,7 @@ function createProductCard(product) {
     `;
 }
 
+// Render all product cards on the homepage
 function renderHomeProducts() {
     const productGrid = document.getElementById("productGrid");
 
@@ -81,6 +89,7 @@ function renderHomeProducts() {
     productGrid.innerHTML = products.map(createProductCard).join("");
 }
 
+// Change main image when a thumbnail is clicked
 function changeImg(imageSrc, trigger) {
     const mainImage = document.getElementById("mainImg");
 
@@ -99,6 +108,7 @@ function changeImg(imageSrc, trigger) {
     }
 }
 
+// Render the correct product on product.html based on URL parameter
 function renderProductDetails() {
     const page = document.body.dataset.page;
 
@@ -106,6 +116,7 @@ function renderProductDetails() {
         return;
     }
 
+    // Example URL: product.html?id=silk-radiance
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("id") || products[0].id;
     const product = products.find((item) => item.id === productId) || products[0];
@@ -131,6 +142,7 @@ function renderProductDetails() {
     mainImage.alt = product.name;
     buyLink.href = `https://wa.me/919330948227?text=${encodeURIComponent(`Hello Manjima's Sharyalap, I want to buy ${product.name}.`)}`;
 
+    // Create all thumbnails for the selected product
     thumbnailList.innerHTML = product.images.map((image, index) => `
         <img
             src="${image}"
@@ -140,11 +152,13 @@ function renderProductDetails() {
         >
     `).join("");
 
+    // Add click event to each thumbnail
     thumbnailList.querySelectorAll("img").forEach((thumb) => {
         thumb.addEventListener("click", () => changeImg(thumb.dataset.image, thumb));
     });
 }
 
+// Initial page setup
 setupNavToggle();
 renderHomeProducts();
 renderProductDetails();
