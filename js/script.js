@@ -32,6 +32,36 @@ const products = [
             "images/saree2/WhatsApp Image 2026-04-17 at 11.40.23 AM (2).jpeg",
             "images/saree2/WhatsApp Image 2026-04-17 at 11.40.24 AM (1).jpeg"
         ]
+    },
+    {
+        // Product 3
+        id: "royal-weave",
+        name: "Royal Weave Saree",
+        category: "Occasion Edit",
+        price: "Rs. 1,899",
+        description: "An elegant statement saree for festive gatherings, receptions, and buyers looking for a richer boutique look.",
+        cover: "images/saree1/3.jpeg",
+        images: [
+            "images/saree1/3.jpeg",
+            "images/saree1/4.jpeg",
+            "images/saree1/5.jpeg",
+            "images/saree1/2.jpeg"
+        ]
+    },
+    {
+        // Product 4
+        id: "celebration-classic",
+        name: "Celebration Classic Saree",
+        category: "New Arrival",
+        price: "Enquire for price",
+        description: "A celebration-ready drape with boutique appeal, ideal for puja, family functions, gifting, and modern traditional styling.",
+        cover: "images/saree2/WhatsApp Image 2026-04-17 at 11.40.23 AM (1).jpeg",
+        images: [
+            "images/saree2/WhatsApp Image 2026-04-17 at 11.40.23 AM (1).jpeg",
+            "images/saree2/WhatsApp Image 2026-04-17 at 11.40.23 AM (2).jpeg",
+            "images/saree2/WhatsApp Image 2026-04-17 at 11.40.24 AM (1).jpeg",
+            "images/saree2/WhatsApp Image 2026-04-17 at 11.40.22 AM.jpeg"
+        ]
     }
 ];
 
