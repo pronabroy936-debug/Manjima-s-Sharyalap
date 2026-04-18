@@ -151,6 +151,16 @@ function getUniqueValues(key) {
     return [...new Set(products.map((product) => product[key]).filter(Boolean))];
 }
 
+function getGalleryImages() {
+    return products.flatMap((product) => product.images.map((image, index) => ({
+        productId: product.id,
+        productName: product.name,
+        category: product.category,
+        image,
+        imageIndex: index + 1
+    })));
+}
+
 function formatDetailLabel(label) {
     return label.replace(/[A-Z]/g, (match) => ` ${match.toLowerCase()}`).replace(/^./, (char) => char.toUpperCase());
 }
@@ -300,6 +310,26 @@ function renderShortlistSection() {
     shortlistEmpty.hidden = items.length > 0;
     updateShortlistLink(items);
     attachShortlistEvents(shortlistGrid);
+}
+
+function renderGallery() {
+    const galleryGrid = document.getElementById("galleryGrid");
+
+    if (!galleryGrid) {
+        return;
+    }
+
+    const galleryItems = getGalleryImages();
+    galleryGrid.innerHTML = galleryItems.map((item) => `
+        <a class="gallery-card" href="product.html?id=${item.productId}">
+            <img src="${item.image}" alt="${item.productName} image ${item.imageIndex}" loading="lazy">
+            <div class="gallery-card-body">
+                <span>${item.category}</span>
+                <strong>${item.productName}</strong>
+                <small>View ${item.imageIndex}</small>
+            </div>
+        </a>
+    `).join("");
 }
 
 function syncShortlistUI() {
@@ -663,6 +693,7 @@ function renderProductDetails() {
 setupNavToggle();
 renderHomeProducts();
 renderShortlistSection();
+renderGallery();
 renderProductDetails();
 setupImageZoom();
 syncShortlistButtons();

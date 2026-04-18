@@ -190,6 +190,7 @@ button {
 }
 
 .hero-copy h1,
+.section h1,
 .section h2,
 .product-info h1 {
     margin: 0;
@@ -397,6 +398,58 @@ button {
     display: grid;
     grid-template-columns: repeat(4, minmax(220px, 1fr));
     gap: 1.4rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+    gap: 1.2rem;
+}
+
+.gallery-card {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(143, 29, 44, 0.08);
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-card:hover,
+.gallery-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 22px 48px rgba(73, 35, 16, 0.18);
+}
+
+.gallery-card img {
+    width: 100%;
+    aspect-ratio: 0.82;
+    object-fit: cover;
+}
+
+.gallery-card-body {
+    padding: 1rem 1.1rem 1.2rem;
+}
+
+.gallery-card-body span,
+.gallery-card-body small {
+    display: block;
+    color: var(--muted);
+}
+
+.gallery-card-body span {
+    margin-bottom: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.gallery-card-body strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
 }
 
 /* Product card styles */
@@ -844,7 +897,8 @@ button {
 /* Responsive layout rules */
 @media (max-width: 1080px) {
     .product-grid,
-    .feature-grid {
+    .feature-grid,
+    .gallery-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -915,7 +969,8 @@ button {
     .product-grid,
     .feature-grid,
     .thumbs,
-    .detail-grid {
+    .detail-grid,
+    .gallery-grid {
         grid-template-columns: 1fr;
     }
 
